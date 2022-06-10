@@ -31,6 +31,7 @@ namespace StreamDeckSharp.Internals
         protected override void Shutdown()
         {
             imageQueue.CompleteAdding();
+            // XXX fix this: it only shuts down by throwing an InvalidOperation.  instead, figure out how to ask StreamDeck for a guaranteed invalid keyID, something like -1, and submit that to poison the thread
             Task.WaitAll(writerTask);
         }
 
